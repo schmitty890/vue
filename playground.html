@@ -13,7 +13,13 @@
     <ul>
       <li v-for="number in listOfNumbers">{{number}}</li>
     </ul>
-    <button @click="count++">{{ count }}</button>
+    <h2>Counter</h2>
+    <p>{{ count }}</p>
+    <button v-on:click="incrementCount">increment count</button>
+    <div>
+      <label for="incrementAmount">Increment by: </label>
+      <input type="number" v-model="incrementAmount" />
+    </div>
   </div>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
@@ -24,7 +30,13 @@
         return {
           message: 'hello it works!',
           count: 0,
+          incrementAmount: 1,
           listOfNumbers: [1, 2, 3, 4, 5]
+        }
+      },
+      methods: {
+        incrementCount() {
+          this.count += this.incrementAmount;
         }
       }
     });
