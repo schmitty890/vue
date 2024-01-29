@@ -6,6 +6,31 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <div id="app">
+    <h2>Sports!</h2>
+    <p v-if="sportsList.length === 0">There are no sports to list . . .</p>
+    <ul v-else>
+      <li v-for="sport in sportsList">{{sport.name}}</li>
+    </ul>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue;
+    const app = createApp({
+      data: () => ({
+        sportsList: [{
+          name: 'hockey'
+        },{
+          name: 'skateboarding'
+        },{
+          name: 'baseball'
+        },{
+          name: 'football'
+        },{
+          name: 'basketball'
+        }]
+      })
+    }).mount('#app');
+  </script>
 </body>
 </html>
