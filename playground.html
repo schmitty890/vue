@@ -13,7 +13,8 @@
     <ul>
       <li v-for="number in listOfNumbers">{{number}}</li>
     </ul>
-    <h2>Counter</h2>
+    <h2>{{ displayTitle }}</h2>
+    <h1>optimized incrememtn amount(computed function): {{ optimizeIncrementAmount }}</h1>
     <p v-bind:data-increment-by="incrementAmount">{{ count }}</p>
     <button v-on:click="incrementCount">increment count</button>
     <div>
@@ -30,15 +31,37 @@
         return {
           message: 'hello it works!',
           count: 0,
+          counterTitle: 'Counter title',
           incrementAmount: 1,
           listOfNumbers: [1, 2, 3, 4, 5]
+        }
+      },
+      computed: {
+        displayTitle() {
+          if(this.count > 20) {
+            return 'Counter title is standard!';
+          } else {
+            return 'Counter title is standard';
+          }
+        },
+        optimizeIncrementAmount() {
+          return this.displayTitle.length;
         }
       },
       methods: {
         incrementCount() {
           this.count += this.incrementAmount;
         }
-      }
+      },
+      watch: {
+        count(newValue, oldValue) {
+          console.log(`new value: ${newValue}`)
+          console.log(`old value: ${oldValue}`)
+          if(newValue > 20) {
+            this.counterTitle = 'Counter title is LONNNNG';
+          }
+        }
+      },
     });
 
     app.mount('#app')
